@@ -1,6 +1,6 @@
 {
     "name": "@sidofc/fml",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Typescript types for Floorplanner FML JSON",
     "main": "./index.js",
     "types": "./index.d.ts",
@@ -22,7 +22,6 @@
     ],
     "author": "Sidney Liebrand",
     "license": "MIT",
-    "types": "./index.d.ts",
     "homepage": "https://github.com/sidofc/fml#readme",
     "bugs": {
         "url": "https://github.com/sidofc/fml/issues"
