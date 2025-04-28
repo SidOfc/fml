@@ -1,41 +1,40 @@
-declare namespace Fml {
-    type UUID = `${string}-${string}-${string}-${string}-${string}`;
-    type Color = `#${string}` | string | number;
-    type Unpersisted<T extends {}> = Omit<T, 'id'>;
+export namespace Fml {
+    export type UUID = `${string}-${string}-${string}-${string}-${string}`;
+    export type Color = `#${string}` | string | number;
 
-    enum ComponentLevel {
+    export enum ComponentLevel {
         CEILING = -2,
         WALL = -1,
         FLOOR = 1,
         STACKABLE = 2,
     }
 
-    type ComponentLevelObject = {
+    export type ComponentLevelObject = {
         [K in keyof typeof ComponentLevel]: (typeof ComponentLevel)[K];
     };
 
-    interface Component {
+    export interface Component {
         id: string;
         level: ComponentLevel;
     }
 
-    interface Material {
+    export interface Material {
         name: string;
         role: string;
     }
 
-    interface MaterialMetadata {
+    export interface MaterialMetadata {
         id: `rs-${number}`;
         name: string;
         url2d: string;
         thumb: {thumb2D: string; thumb3D: string};
     }
 
-    interface Variant {
+    export interface Variant {
         readonly id: number;
     }
 
-    interface Point {
+    export interface Point {
         /** @unit centimeter */
         x: number;
 
@@ -43,7 +42,7 @@ declare namespace Fml {
         y: number;
     }
 
-    interface Endpoint3D {
+    export interface Endpoint3D {
         /** @unit centimeter */
         z: number;
 
@@ -51,12 +50,12 @@ declare namespace Fml {
         h: number;
     }
 
-    interface Point3D extends Point {
+    export interface Point3D extends Point {
         /** @unit centimeter */
         z: number;
     }
 
-    interface BezierPoint extends Point {
+    export interface BezierPoint extends Point {
         /** @unit centimeter */
         cx: number;
 
@@ -67,12 +66,12 @@ declare namespace Fml {
         cz?: number;
     }
 
-    interface GenericLine {
+    export interface GenericLine {
         a: Point;
         b: Point;
     }
 
-    interface Line extends GenericLine {
+    export interface Line extends GenericLine {
         type: 'solid_line' | 'dashed_line' | 'dotted_line' | 'dashdotted_line';
         color: Color;
         groupMarker?: number;
@@ -81,7 +80,7 @@ declare namespace Fml {
         thickness: number;
     }
 
-    interface Label extends Point {
+    export interface Label extends Point {
         text: string;
         fontFamily: string;
         fontColor: Color;
@@ -112,7 +111,7 @@ declare namespace Fml {
         fontAlpha?: number;
     }
 
-    interface Item extends Point3D {
+    export interface Item extends Point3D {
         refid: Component['id'];
         light?: {on: boolean; color: Color; watt: number};
         materials?: {[material_name: Material['name']]: Variant['id']};
@@ -148,7 +147,7 @@ declare namespace Fml {
         snapDist: number;
     }
 
-    interface GenericOpening {
+    export interface GenericOpening {
         refid: Component['id'];
         name?: string;
         showLabel?: boolean;
@@ -184,20 +183,20 @@ declare namespace Fml {
         name_y?: number;
     }
 
-    interface Door extends GenericOpening {
+    export interface Door extends GenericOpening {
         type: 'door';
         doorColor?: Color;
         mirrored?: [x: 0 | 1, y: 0 | 1];
         threshold?: {color: Color} | Partial<MaterialMetadata>;
     }
 
-    interface Window extends GenericOpening {
+    export interface Window extends GenericOpening {
         type: 'window';
     }
 
-    type Opening = Door | Window;
+    export type Opening = Door | Window;
 
-    type WallDecor =
+    export type WallDecor =
         | {color: Color}
         | {refid: Component['id']}
         | {
@@ -227,7 +226,7 @@ declare namespace Fml {
               };
           };
 
-    interface Wall extends GenericLine {
+    export interface Wall extends GenericLine {
         c?: Point;
         az: Endpoint3D;
         bz: Endpoint3D;
@@ -244,7 +243,7 @@ declare namespace Fml {
         balance: number;
     }
 
-    interface TextureTransform {
+    export interface TextureTransform {
         /** @unit degree */
         /** @range -180.0, 180.0 */
         rotation?: number;
@@ -262,7 +261,7 @@ declare namespace Fml {
         sy?: number;
     }
 
-    interface GenericArea extends TextureTransform {
+    export interface GenericArea extends TextureTransform {
         poly: Point[];
         name?: string;
         role?: number;
@@ -306,14 +305,14 @@ declare namespace Fml {
         patternScale?: number;
     }
 
-    interface Area extends GenericArea {
+    export interface Area extends GenericArea {
         poly: Point[];
         ceiling?:
             | {enabled: boolean; color: Color}
             | {enabled: boolean; refid: Component['id']};
     }
 
-    interface Surface extends GenericArea {
+    export interface Surface extends GenericArea {
         /**
          ** @note poly is tricky due to variance in point shapes:
          *
@@ -336,11 +335,11 @@ declare namespace Fml {
         transparency?: number;
     }
 
-    type CameraBackgroundImage =
+    export type CameraBackgroundImage =
         | {type_name: 'plane'; url: string}
         | {type_name: 'sphere'; url: string; sky_id: number};
 
-    interface CameraLightSettings {
+    export interface CameraLightSettings {
         day: boolean;
         dayTime:
             | 'Sunrise'
@@ -361,8 +360,7 @@ declare namespace Fml {
         intensity: number;
     }
 
-    interface Camera extends Point3D {
-        id: number;
+    export interface Camera extends Point3D {
         name: string;
         type_name: 'orbital' | 'walkthrough';
         lightSettings: CameraLightSettings;
@@ -384,7 +382,11 @@ declare namespace Fml {
         uz: number;
     }
 
-    interface DesignSettings {
+    export interface FloorCamera extends Camera {
+        id: number;
+    }
+
+    export interface DesignSettings {
         showCeilings3D: boolean;
         engineAutoDims: boolean;
         engineAutoThickness: boolean;
@@ -402,7 +404,7 @@ declare namespace Fml {
         minWallLength?: number;
     }
 
-    interface Design {
+    export interface Design {
         id: number;
         name: string;
         items: Item[];
@@ -410,12 +412,12 @@ declare namespace Fml {
         walls: Wall[];
         areas: Area[];
         labels: Label[];
-        cameras: Unpersisted<Camera>[];
+        cameras: Camera[];
         surfaces: Surface[];
         settings?: DesignSettings;
     }
 
-    interface Drawing {
+    export interface Drawing {
         url: string;
         visible: boolean;
 
@@ -443,22 +445,22 @@ declare namespace Fml {
         alpha: number;
     }
 
-    interface Floor {
+    export interface Floor {
         id: number;
         name: string;
         level: number;
         designs: Design[];
         drawing?: Drawing;
 
-        /** @note deprecated, cameras have moved to Design */
-        cameras?: Camera[];
+        /** @note deprecated since cameras have moved to Design */
+        cameras?: FloorCamera[];
 
         /** @unit centimeter */
         /** @note default wall height when drawing walls */
         height: number;
     }
 
-    interface ProjectSettings {
+    export interface ProjectSettings {
         useMetric: boolean;
         showGrid: boolean;
         showDims: boolean;
@@ -521,7 +523,7 @@ declare namespace Fml {
         hideItemsAboveHeight: number;
     }
 
-    interface Project {
+    export interface Project {
         id: number;
         name: string;
         public: boolean;

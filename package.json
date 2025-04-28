@@ -2,15 +2,8 @@
     "name": "@sidofc/fml",
     "version": "0.0.1",
     "description": "Typescript types for Floorplanner FML JSON",
-    "main": "./index.d.ts",
+    "main": "./index.js",
     "types": "./index.d.ts",
-    "exports": {
-        ".": {
-            "default": "./index.d.ts",
-            "import": "./index.d.ts",
-            "require": "./index.d.ts"
-        }
-    },
     "prettier": {
         "tabWidth": 4,
         "singleQuote": true,
