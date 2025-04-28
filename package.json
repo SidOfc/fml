@@ -1,0 +1,37 @@
+{
+    "name": "@sidofc/fml",
+    "version": "0.0.1",
+    "description": "Typescript types for Floorplanner FML JSON",
+    "main": "./index.d.ts",
+    "types": "./index.d.ts",
+    "exports": {
+        ".": {
+            "default": "./index.d.ts",
+            "import": "./index.d.ts",
+            "require": "./index.d.ts"
+        }
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": true,
+        "printWidth": 90,
+        "bracketSpacing": false,
+        "trailingComma": "es5",
+        "quoteProps": "preserve"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sidofc/fml.git"
+    },
+    "keywords": [
+        "floorplanner",
+        "fml"
+    ],
+    "author": "Sidney Liebrand",
+    "license": "MIT",
+    "types": "./index.d.ts",
+    "homepage": "https://github.com/sidofc/fml#readme",
+    "bugs": {
+        "url": "https://github.com/sidofc/fml/issues"
+    }
+}
