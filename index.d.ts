@@ -141,7 +141,7 @@ export interface Label extends Point {
 export interface Item extends Point3D {
     refid: Component['id'];
     light?: {on: boolean; color: Color; watt: number};
-    materials?: {[material_name: Material['name']]: Variant['id']};
+    materials?: {[material_name: Material['name']]: Variant['id']} | [];
     features?: {[intiaro_material_role: string]: string};
     configuration?: {type: 'intiaro'; id: UUID};
     mirrored?: [x: 0 | 1, y: 0 | 1];
