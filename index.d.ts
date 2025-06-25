@@ -158,8 +158,8 @@ export interface Item extends Point3D {
      */
     modularSystemConnector?: {
         id: UUID;
+        root: boolean;
         connections: Partial<Record<ConnectionType, UUID>>;
-        root?: boolean;
     };
 
     /**
