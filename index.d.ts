@@ -142,7 +142,7 @@ export interface Label extends Point {
 export interface Item extends Point3D {
     refid: Component['id'];
     light?: {on: boolean; color: Color; watt: number};
-    link?: {id: UUID; connections: Partial<Record<ConnectionType, UUID>>};
+    link?: {id: UUID; connections: Partial<Record<ConnectionType, UUID>>; root?: boolean};
     materials?: {[material_name: Material['name']]: Variant['id']} | [];
     features?: {[intiaro_material_role: string]: string};
     configuration?: {type: 'intiaro'; id: UUID};
