@@ -1,5 +1,6 @@
-export type UUID = `${string}-${string}-${string}-${string}-${string}`;
+export type UUID = `${string}-${string}-${string}-${string}-${string}` | string;
 export type Color = `#${string}` | string | number;
+export type ConnectionType = 'left' | 'right' | 'front' | 'front2' | 'back';
 
 export enum ComponentLevel {
     CEILING = -2,
@@ -141,6 +142,7 @@ export interface Label extends Point {
 export interface Item extends Point3D {
     refid: Component['id'];
     light?: {on: boolean; color: Color; watt: number};
+    link?: {id: UUID; connections: Partial<Record<ConnectionType, UUID>>};
     materials?: {[material_name: Material['name']]: Variant['id']} | [];
     features?: {[intiaro_material_role: string]: string};
     configuration?: {type: 'intiaro'; id: UUID};
@@ -183,11 +185,6 @@ export interface Item extends Point3D {
      * @range -180.0, 180.0
      */
     rotation_y?: number;
-
-    /**
-     * @unit centimeter
-     */
-    snapDist: number;
 }
 
 export interface GenericOpening {
